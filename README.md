@@ -3,6 +3,7 @@ A simple command-line tool to check the status of links
 
 
 <h2>Installation</h2>
+Download files via the zip file or using git<br/>
 To install dependencies:<br/>
 npm install<br/>  
 
