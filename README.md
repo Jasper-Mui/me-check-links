@@ -10,7 +10,7 @@ A simple command-line tool to check the status of links
    npm link 
    
 <h2>What is it for?</h2>
-MCl command is used to quickly find bad links of HTTP status of 400 or 404. (Please do not relay on this tool as it is not robust enough to do so. Use it as an aid) 
+MCl command is used to quickly find bad links of HTTP status of 400 or 404. (Please do not rely on this tool as it is not robust enough to do so. Use it as an aid) 
 
 <h2>How to use</h2>
 MCL - broken link finder of specific file
