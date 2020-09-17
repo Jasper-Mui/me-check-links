@@ -24,7 +24,6 @@ Link result show up in color.<br/>
 
 Can check link of a html page via url using -u option and supplying a valid http url.<br>
 <br>
-
 The tool allows for multiple url or html files to be checked at one if enter one after another separated by a space. <br/>
 But url and html cannot be mixed together in a single command.<br/>
 The -u option is still required when checking multiple urls.<br/>
