@@ -5,12 +5,15 @@ A simple command-line tool to check the status of links
 <h2>Installation</h2>
 1. Download files via the zip file or using git<br/>
 2. To install dependencies:<br/>
-npm install<br/>  
+   npm install<br/>  
 3. To create a symlink for the command:<br/>
-npm link 
+   npm link 
+   
+<h2>What is it for?</h2>
+MCl command is used to quickly find bad links of HTTP status of 400 or 404. (Please do not relay on this tool as it is not robust enough to do so. Use it as an aid) 
 
 <h2>How to use</h2>
-BLK - broken link finder of specific file
+MCL - broken link finder of specific file
 Options:<br/>
 -v or /v,  to get the version number and name of the tool<br/> 
 -u or /u,  to check the link of a HTML page of supplied URL<br/> 
