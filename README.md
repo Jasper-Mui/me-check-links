@@ -2,7 +2,7 @@
 A simple command-line tool to check the status of links
 
 
-<h2>Requirements</h2>
+<h2>Installation</h2>
 To install dependencies:<br/>
 npm install<br/>  
 
