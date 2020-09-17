@@ -17,10 +17,10 @@ MCL - broken link finder of specific file<br/>
       if no arguments are supplied, a help message will be displayed<br/>
 Options:<br/>
 -v or /v,  to get the version number and name of the tool<br/> 
--u or /u,  to check the link of a HTML page of supplied URL<br/> 
+-u or /u,  to check the links of a HTML page of supplied URL<br/> 
 
 <h2>Feature</h2>
-The link result shows up in color to display the status of links.<br/>  
+The result of the links shows up in color to display the status of links.<br/>  
 1. Green links are good links with an HTTP status of 200.<br/> 
 2. Red links are bad links of HTTP status 400 or 404.<br/> 
 3. Grey links are unknown with any other HTTP status.<br/> 
