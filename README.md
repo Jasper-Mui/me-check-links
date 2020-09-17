@@ -3,10 +3,10 @@ A simple command-line tool to check the status of links
 
 
 <h2>Installation</h2>
-Download files via the zip file or using git<br/>
-To install dependencies:<br/>
+1. Download files via the zip file or using git<br/>
+2. To install dependencies:<br/>
 npm install<br/>  
-To create a symlink for the command:<br/>
+3. To create a symlink for the command:<br/>
 npm link 
 
 <h2>How to use</h2>
