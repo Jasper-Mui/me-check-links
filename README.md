@@ -1,31 +1,31 @@
 # me-check-links
-A simple command line tool to check status of links
+A simple command-line tool to check the status of links
 
 
 <h2>Requirements</h2>
 To install dependencies:<br/>
 npm install<br/>  
 
-To create symlink for the command:<br/>
+To create a symlink for the command:<br/>
 npm link 
 
 <h2>How to use</h2>
 BLK - broken link finder of specific file
 Options:<br/>
--v or /v,  to get verison number and name of the tool<br/> 
--u or /u,  to check link of a html page of supplied url<br/> 
+-v or /v,  to get the version number and name of the tool<br/> 
+-u or /u,  to check the link of a HTML page of supplied URL<br/> 
 
 <h2>Feature</h2>
-Link result show up in color.<br/>  
-1. Green links are good link with a HTTP status of 200.<br/> 
+The link result shows up in color to display the status of links.<br/>  
+1. Green links are good links with an HTTP status of 200.<br/> 
 2. Red links are bad links of HTTP status 400 or 404.<br/> 
-3. Grey link are unknown with any other HTTP status.<br/> 
+3. Grey links are unknown with any other HTTP status.<br/> 
 <br/>  
-Can check link of a html page via url using -u option and supplying a valid http url.<br>
+The command can check HTML pages links via URL using -u option and supplying a valid HTTP URL.<br>
 <br>
-The tool allows for multiple url or html files to be checked at one if enter one after another separated by a space. <br/>
+The tool can check multiple URLs or HTML files to be checked at once if more than enter one URL or HTML file is entered one after another, separated by a space.<br/>
 But url and html cannot be mixed together in a single command.<br/>
-The -u option is still required when checking multiple urls.<br/>
+The -u option is still required when checking multiple URLs.<br/>
 <br>
-Handles unix and windows style of args -u or /u
+Handles Unix and windows style of args -u or /u
 
