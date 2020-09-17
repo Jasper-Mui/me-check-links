@@ -44,18 +44,16 @@ export function cli(args) {
     if ((!parseArgs.version && !parseArgs.url && parsedArgs.inputArg == 0) || (parseArgs.version && parseArgs.url)){
         console.log("BLK - broken link finder of specific file")
         console.log("-v,  to get verison number and name of the tool")
-       
+        console.log("-u,  to check link of a html page of supplied url")
     } else if (parsedArgs.version){
         console.log("Name of Tool: " + pjson.name + "\nVerison number: " + pjson.version)
     } else if (parsedArgs.url) {
         parsedArgs.inputArg.map(url => {
             fetch(url)
                 .then(res => res.text())
-                .then(body => {
-                    linkCheck(body)
-                });
+                .then(body => linkCheck(body))
+                .catch(() => console.log(chalk.bgRed("Invalid url, absolute URL only")));
         })
-
     } else {
         parsedArgs.inputArg.map(file => {
             fs.readFile(file, (err, data) => {
