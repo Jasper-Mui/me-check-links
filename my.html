@@ -1,0 +1,193 @@
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+      
+          
+            npm-uninstall  | 
+      
+      npm Documentation
+    </title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="icon" type="image/ico" href="/assets/images/favicon.ico" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1,user-scalable=yes">
+  </head>
+  <header class="header">
+    <div class="header-links">
+      <a href="https://docs.npmjs.com">docs home</a>
+      <a href="https://npmjs.com/support">contact support</a>
+      <a href="https://npm.community">npm.community</a>
+      <a id="www-link" href="https://www.npmjs.com">npmjs.com</a>
+    </div>
+  </header>
+  
+  
+  <div class="container cli-article">
+  
+  <div class="article-head">
+    <div class="breadcrumb">
+      CLI documentation >
+      <a href="/cli-documentation/cli" class="article-breadcrumb">
+        CLI commands
+      </a>
+    </div>
+  
+    <h1 class="title">
+      <a href="/cli/uninstall.html">
+        npm-uninstall <span class='faint subtitle'>Remove a package</span>
+      </a>
+    </h1>
+  </div>
+  
+  <div class="article">
+  
+  <h2 id="synopsis">SYNOPSIS</h2>
+  
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm uninstall [&lt;@scope&gt;/]&lt;pkg&gt;[@&lt;version&gt;]... [-S|--save|-D|--save-dev|-O|--save-optional|--no-save]
+  
+  aliases: remove, rm, r, un, unlink
+  </code></pre></div></div>
+  
+  <h2 id="description">DESCRIPTION</h2>
+  
+  <p>This uninstalls a package, completely removing everything npm installed
+  on its behalf.</p>
+  
+  <p>Example:</p>
+  
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm uninstall sax
+  </code></pre></div></div>
+  
+  <p>In global mode (ie, with <code class="highlighter-rouge">-g</code> or <code class="highlighter-rouge">--global</code> appended to the command),
+  it uninstalls the current package context as a global package.</p>
+  
+  <p><code class="highlighter-rouge">npm uninstall</code> takes 3 exclusive, optional flags which save or update
+  the package version in your main package.json:</p>
+  
+  <ul>
+    <li>
+      <p><code class="highlighter-rouge">-S, --save</code>: Package will be removed from your <code class="highlighter-rouge">dependencies</code>.</p>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">-D, --save-dev</code>: Package will be removed from your <code class="highlighter-rouge">devDependencies</code>.</p>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">-O, --save-optional</code>: Package will be removed from your <code class="highlighter-rouge">optionalDependencies</code>.</p>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">--no-save</code>: Package will not be removed from your <code class="highlighter-rouge">package.json</code> file.</p>
+    </li>
+  </ul>
+  
+  <p>Further, if you have an <code class="highlighter-rouge">npm-shrinkwrap.json</code> then it will be updated as
+  well.</p>
+  
+  <p>Scope is optional and follows the usual rules for <code class="highlighter-rouge"><a href="/misc/scope">npm-scope</a></code>.</p>
+  
+  <p>Examples:</p>
+  
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm uninstall sax --save
+  npm uninstall @myorg/privatepackage --save
+  npm uninstall node-tap --save-dev
+  npm uninstall dtrace-provider --save-optional
+  npm uninstall lodash --no-save
+  </code></pre></div></div>
+  
+  <h2 id="see-also">SEE ALSO</h2>
+  
+  <ul>
+    <li><a href="/cli/prune">npm-prune</a></li>
+    <li><a href="/cli/install">npm-install</a></li>
+    <li><a href="/files/folders">npm-folders</a></li>
+    <li><a href="/cli/config">npm-config</a></li>
+    <li><a href="/misc/config">npm-config</a></li>
+    <li><a href="/files/npmrc">npmrc</a></li>
+  </ul>
+  
+  
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="paginate">
+  
+  <hr />
+  
+  
+  
+  
+  
+  </div>
+  
+  
+  </div>
+  
+  <footer>
+    <div class="container">
+  
+      
+  
+      <p>
+      Found a typo?
+      <a href="https://github.com/npm/cli/">Let us know!</a>
+      </p>
+  
+      
+  
+      <div id="npm-install-instructions">
+        <p>
+          The current stable version of npm is <a id="npm-stable-version" href="https://github.com/npm/cli/releases/latest">here</a>. To upgrade, run: <code>npm install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff918f92bf939e8b9a8c8b">[email&#160;protected]</a> -g</code>
+        </p>
+      </div>
+  
+      <p>
+       To report bugs or submit feature requests for the docs, please <a href="https://npm.community/c/support/docs-needed">post here.</a> Submit npm issues <a href="https://npm.community/c/bugs">here</a>.
+      </p>
+  
+    </div>
+  </footer>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    (function() {
+      if (document.querySelectorAll) {
+        var selector = [
+          '.article h2', '.article h3', '.article h4', '.article h5', '.article h6',
+          '.cli-article h2', '.cli-article h3', '.cli-article h4', '.cli-article h5', '.cli-article h6'
+        ].join(',')
+  
+        Array.prototype.slice.call(document.querySelectorAll(selector)).forEach(function(elem) {
+          var link = document.createElement('a')
+          link.href = '#' + elem.id
+          link.innerText = elem.innerText
+          elem.innerText = ''
+  
+          elem.appendChild(link)
+  
+          var icon = document.createElement('span')
+          icon.classList.add('anchor-icon')
+          icon.innerText = '§'
+          link.appendChild(icon)
+        })
+      }
+    })()
+  </script>
+  
+  <script src="/assets/js/marketing/google_analytics.js" type="text/javascript"></script>
+  <script src="/assets/js/marketing/eloqua.js" type="text/javascript"></script>
+  
+  
