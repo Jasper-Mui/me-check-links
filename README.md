@@ -6,7 +6,6 @@ A simple command-line tool to check the status of links
 Download files via the zip file or using git<br/>
 To install dependencies:<br/>
 npm install<br/>  
-
 To create a symlink for the command:<br/>
 npm link 
 
