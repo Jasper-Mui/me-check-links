@@ -3,9 +3,9 @@ A simple command-line tool to check the status of links
 
 
 <h2>Installation</h2>
-npm: npm i @Jasper-mui/me-check-link -g
+npm: npm i @Jasper-mui/me-check-link -g <br/>
 
-manually: 
+manually:
 1. Download files via the zip file or using git<br/>
 2. To install dependencies:<br/>
    npm install<br/>  
