@@ -27,13 +27,20 @@ function linkCheck(file) {
     urls.map(url => {
         fetch(url)
             .then(res => {
-                if (res.status == 200) {
-                    console.log(chalk.green(url))
-                } else if (res.status == 400 || res.status == 404) {
-                    console.log(chalk.red(url))
+                if (res.ok) {                
+                    if (res.status == 200) {
+                        console.log(chalk.green(url));
+                    } else if (res.status == 400 || res.status == 404) {
+                        console.log(chalk.red(url));
+                    } else {
+                        console.log(chalk.grey(url));
+                    }
                 } else {
-                    console.log(chalk.grey(url))
+                    throw new Error('Poor network response');
                 }
+            })
+            .catch(error => {
+                console.log(chalk.red(url));
             });
     })
 }
@@ -50,9 +57,17 @@ export function cli(args) {
     } else if (parsedArgs.url) {
         parsedArgs.inputArg.map(url => {
             fetch(url)
-                .then(res => res.text())
+                .then(res => {
+                    if (!res.ok){
+                        throw new Error('Poor network response');
+                    }
+                    return res.text();
+                })
                 .then(body => linkCheck(body))
-                .catch(() => console.log(chalk.bgRed("Invalid url, absolute URL only")));
+                .catch((error) => {
+                    console.error('Fetch operation failed', error);
+                    console.log(chalk.bgRed("Invalid url, absolute URL only"));
+                });
         })
     } else {
         parsedArgs.inputArg.map(file => {
