@@ -36,5 +36,7 @@ The tool can check multiple URLs or HTML files to be checked at once if more tha
 But url and html cannot be mixed together in a single command.<br/>
 The -u option is still required when checking multiple URLs.<br/>
 <br>
-Handles Unix and windows style of args -u or /u
+Handles Unix and windows style of args -u or /u<br/>
+<br>
+Handles links that cause timeouts smoothly
 
