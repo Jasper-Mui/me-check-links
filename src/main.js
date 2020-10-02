@@ -49,7 +49,7 @@ export function cli(args) {
     const parsedArgs = parseArgs(args)
 
     if ((!parseArgs.version && !parseArgs.url && parsedArgs.inputArg == 0) || (parseArgs.version && parseArgs.url)){
-        console.log("BLK - broken link finder of specific file")
+        console.log("mcl - a command to check links of a HTML page")
         console.log("-v,  to get verison number and name of the tool")
         console.log("-u,  to check link of a html page of supplied url")
     } else if (parsedArgs.version){
