@@ -61,13 +61,13 @@ async function linkCheck(file) {
         })
         
         //return after promise has been fufiled
-        setTimeout(() => resolve(), 90*totalLinks)
+        setTimeout(() => resolve(), 20*totalLinks)
     })
     .then((result) => {
         console.log("\nRESULTS:");
-        console.log("Good Links: " + goodLinks);
-        console.log("Bad Links: " + badLinks);
-        console.log("Unknown Links: " + unknownLinks);
+        console.log(chalk.green("Good Links: ") + goodLinks);
+        console.log(chalk.red("Bad Links: ") + badLinks);
+        console.log(chalk.grey("Unknown Links: ") + unknownLinks);
         console.log("Unloaded Links: " + unloadedLinks);
         console.log("Total Links: " + totalLinks);
     })
