@@ -3,16 +3,17 @@ A simple command-line tool to check the status of links
 
 
 <h2>Installation</h2>
-npm: npm i @Jasper-mui/me-check-link -g <br/>
+npm: 
+```npm i @Jasper-mui/me-check-link -g <br/>
 
 <br/>or<br/>
 
 manually:
 1. Download files via the zip file or using git<br/>
 2. To install dependencies:<br/>
-   npm install<br/>  
+   ```npm install<br/>  
 3. To create a symlink for the command:<br/>
-   npm link 
+   ```npm link 
    
 <h2>What is it for?</h2>
 MCl command is used to quickly find bad links of HTTP status of 400 or 404. (Please do not rely on this tool as it is not robust enough to do so. Use it as an aid) 
