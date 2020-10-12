@@ -2,6 +2,7 @@ import arg from 'arg'
 import chalk from 'chalk';
 import fetch from 'node-fetch';
 import pjson from '../package.json';
+
 const fs = require('fs') 
 
 function parseArgs(rawArgs) {
@@ -10,44 +11,103 @@ function parseArgs(rawArgs) {
     const args = arg(
       {
         '-v': Boolean,
-        '-u': Boolean
+        '-u': Boolean,
+        '-j': Boolean,
       }
     );
     return {
       version: args['-v'] || false,
       url: args['-u'] || false,
-      inputArg: args['-u'] ? rawArgs.slice(3) : rawArgs.slice(2)
+      inputArg: args['-u'] || args['-j'] ? rawArgs.slice(3) : rawArgs.slice(2),
+      jsonOutput: args['-j'] || false,
     };
 }
 
-function linkCheck(file) {
+async function getStatus(url) {
+    try {
+        const res = await fetch(url);
+        return {url: url, status: res.status}
+    }catch(err) {
+        return {url, status: err.status}
+    }
+}
+
+function linkCheck(file, jsonOutput) {
     const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,25}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
     const urls = file.match(regex);
 
-    urls.map(url => {
-        fetch(url)
-            .then(res => {
-                if (res.ok) {                
-                    if (res.status == 200) {
-                        console.log(chalk.green(url));
-                    } else if (res.status == 400 || res.status == 404) {
-                        console.log(chalk.red(url));
+    const promises = urls.map(getStatus);
+
+    Promise
+        .allSettled(promises)
+        .then(res => {
+            return res.map(res => {
+                if (res.value.status == 200) {
+                    if (jsonOutput) {
+                        return {url: res.value.url, status: res.value.status}
                     } else {
-                        console.log(chalk.grey(url));
+                        console.log(chalk.green(res.value.url));
+                    }
+                } else if (res.value.status == 400 || res.value.status == 404) {
+                    if (jsonOutput) {
+                        return {url: res.value.url, status: res.value.status}
+                    } else {
+                        console.log(chalk.red(res.value.url));
                     }
                 } else {
-                    throw new Error('Poor network response');
+                    if (jsonOutput) {
+                        return {url: res.value.url, status: res.value.status}
+                    } else {
+                        console.log(chalk.grey(res.value.url));
+                    }
                 }
             })
-            .catch(error => {
-                console.log(chalk.red(url));
-            });
-    })
+        })
+        .then(res => {if (jsonOutput) console.log(res)})
+        .catch(err => console.error(err))
+
+    // urls.map(url => {
+    //     fetch(url)
+    //         .then(res => {
+    //             if (res.ok) {          
+    //                 if (res.status == 200) {
+    //                     if (jsonOutput) {
+    //                         console.log("{\n\turl: " + chalk.green(url) + ", " + "\n\tstatus: " + res.status + "\n}\,")
+    //                     } else {
+    //                         console.log(chalk.green(url));
+    //                     }
+    //                 } else if (res.status == 400 || res.status == 404) {
+    //                     if (jsonOutput) {
+    //                         console.log("{\n\turl: " + chalk.red(url) + ", " + "\n\tstatus: " + res.status + "\n}\,")
+    //                     } else {
+    //                         console.log(chalk.red(url));
+    //                     }
+    //                 } else {
+    //                     if (jsonOutput) {
+    //                         console.log("{\n\turl: " + chalk.grey(url) + ", " + "\n\tstatus: " + res.status + "\n}\,")
+    //                     } else {
+    //                         console.log(chalk.grey(url));
+    //                     }
+    //                 }
+    //             } else {
+    //                 throw new Error('Poor network response');
+    //             }
+    //         })
+    //         .catch(err => {
+    //             if (jsonOutput) {
+    //                 console.log("{\n\turl: " + chalk.red(url) + ", " + "\n\tstatus: " + err.status + "\n}\,")
+    //             } else {
+    //                 console.log(chalk.red(url));
+    //             }
+    //         });
+    // })
+
+
 }
 
 export function cli(args) {
     const parsedArgs = parseArgs(args)
-
+    console.log(parsedArgs)
     if ((!parseArgs.version && !parseArgs.url && parsedArgs.inputArg == 0) || (parseArgs.version && parseArgs.url)){
         console.log("mcl - a command to check links of a HTML page")
         console.log("-v,  to get verison number and name of the tool")
@@ -63,7 +123,7 @@ export function cli(args) {
                     }
                     return res.text();
                 })
-                .then(body => linkCheck(body))
+                .then(body => linkCheck(body), parsedArgs.jsonOutput)
                 .catch((error) => {
                     console.error('Fetch operation failed', error);
                     console.log(chalk.bgRed("Invalid url, absolute URL only"));
@@ -73,7 +133,7 @@ export function cli(args) {
         parsedArgs.inputArg.map(file => {
             fs.readFile(file, (err, data) => {
                 if (err) throw err;
-                linkCheck(data.toString());
+                linkCheck(data.toString(), parsedArgs.jsonOutput);
             })
         })
     }

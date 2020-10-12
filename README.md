@@ -23,12 +23,14 @@ MCL - a command to check links of a HTML page<br/>
 Options:<br/>
 -v or /v,  to get the version number and name of the tool<br/> 
 -u or /u,  to check the links of a HTML page of supplied URL<br/> 
+-j or /j,  change output to json format, all links display in green no long follows color rules<br/> 
 
 <h2>Feature</h2>
-The result of the links shows up in color to display the status of links.<br/>  
+The result of the links shows up in color to display the status of links. Does not apply to -j option as all links will show in green<br/>  
 1. Green links are good links with an HTTP status of 200.<br/> 
 2. Red links are bad links of HTTP status 400 or 404.<br/> 
 3. Grey links are unknown with any other HTTP status.<br/> 
+
 <br/>  
 The command can check HTML pages links via URL using -u option and supplying a valid HTTP URL.<br>
 <br>
@@ -39,4 +41,5 @@ The -u option is still required when checking multiple URLs.<br/>
 Handles Unix and windows style of args -u or /u<br/>
 <br>
 Handles links that cause timeouts smoothly
-
+<br>
+Output in JSON format
