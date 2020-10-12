@@ -23,7 +23,7 @@ function parseArgs(rawArgs) {
     };
 }
 
-async function getStatus(url) {
+async function getStatus(url) { // promise function to fetch all url status
     try {
         const res = await fetch(url);
         return {url: url, status: res.status}
@@ -43,71 +43,27 @@ function linkCheck(file, jsonOutput) {
         .then(res => {
             return res.map(res => {
                 if (res.value.status == 200) {
-                    if (jsonOutput) {
-                        return {url: res.value.url, status: res.value.status}
-                    } else {
-                        console.log(chalk.green(res.value.url));
-                    }
+                    console.log(chalk.green(res.value.url));
+
+                    return { url: res.value.url, status: res.value.status }
                 } else if (res.value.status == 400 || res.value.status == 404) {
-                    if (jsonOutput) {
-                        return {url: res.value.url, status: res.value.status}
-                    } else {
-                        console.log(chalk.red(res.value.url));
-                    }
+                    console.log(chalk.red(res.value.url));
+
+                    return { url: res.value.url, status: res.value.status }
                 } else {
-                    if (jsonOutput) {
-                        return {url: res.value.url, status: res.value.status}
-                    } else {
-                        console.log(chalk.grey(res.value.url));
-                    }
+                    console.log(chalk.grey(res.value.url));
+
+                    return { url: res.value.url, status: res.value.status }
                 }
             })
         })
-        .then(res => {if (jsonOutput) console.log(res)})
+        .then(res => { if (jsonOutput) console.log(res) })
         .catch(err => console.error(err))
-
-    // urls.map(url => {
-    //     fetch(url)
-    //         .then(res => {
-    //             if (res.ok) {          
-    //                 if (res.status == 200) {
-    //                     if (jsonOutput) {
-    //                         console.log("{\n\turl: " + chalk.green(url) + ", " + "\n\tstatus: " + res.status + "\n}\,")
-    //                     } else {
-    //                         console.log(chalk.green(url));
-    //                     }
-    //                 } else if (res.status == 400 || res.status == 404) {
-    //                     if (jsonOutput) {
-    //                         console.log("{\n\turl: " + chalk.red(url) + ", " + "\n\tstatus: " + res.status + "\n}\,")
-    //                     } else {
-    //                         console.log(chalk.red(url));
-    //                     }
-    //                 } else {
-    //                     if (jsonOutput) {
-    //                         console.log("{\n\turl: " + chalk.grey(url) + ", " + "\n\tstatus: " + res.status + "\n}\,")
-    //                     } else {
-    //                         console.log(chalk.grey(url));
-    //                     }
-    //                 }
-    //             } else {
-    //                 throw new Error('Poor network response');
-    //             }
-    //         })
-    //         .catch(err => {
-    //             if (jsonOutput) {
-    //                 console.log("{\n\turl: " + chalk.red(url) + ", " + "\n\tstatus: " + err.status + "\n}\,")
-    //             } else {
-    //                 console.log(chalk.red(url));
-    //             }
-    //         });
-    // })
-
-
 }
 
 export function cli(args) {
     const parsedArgs = parseArgs(args)
-    console.log(parsedArgs)
+
     if ((!parseArgs.version && !parseArgs.url && parsedArgs.inputArg == 0) || (parseArgs.version && parseArgs.url)){
         console.log("mcl - a command to check links of a HTML page")
         console.log("-v,  to get verison number and name of the tool")
