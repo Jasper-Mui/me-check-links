@@ -24,6 +24,8 @@ Options:<br/>
 -v or /v,  to get the version number and name of the tool<br/> 
 -u or /u,  to check the links of a HTML page of supplied URL<br/> 
 -j or /j,  change output to json format, all links display in green no long follows color rules<br/> 
+-b or /b,  this flag will only show bad links, no flag specified will show all links
+-g or /g,  this flag will onyl show good links, no flag specified will show all links
 
 <h2>Feature</h2>
 The result of the links shows up in color to display the status of links. Does not apply to -j option as all links will show in green<br/>  
@@ -43,3 +45,5 @@ Handles Unix and windows style of args -u or /u<br/>
 Handles links that cause timeouts smoothly
 <br>
 Output in JSON format
+<br>
+Flags to choice to only show good or bad links
