@@ -3,7 +3,8 @@ A simple command-line tool to check the status of links
 
 
 <h2>Installation</h2>
-npm: `npm i @Jasper-mui/me-check-link -`<br/>
+npm: <br/>
+`npm i @Jasper-mui/me-check-link -g`<br/>
 
 <br/>or<br/>
 
