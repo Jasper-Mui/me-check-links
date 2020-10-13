@@ -29,18 +29,23 @@ Options:<br/>
 -g or /g,  this flag will onyl show good links, no flag specified will show all links
 
 <h2>Feature</h2>
-The result of the links shows up in color to display the status of links. Does not apply to -j option as all links will show in green<br/>  
+
+* The result of the links shows up in color to display the status of links. Does not apply to -j option as all links will show in green<br/>  
 1. Green links are good links with an HTTP status of 200.<br/> 
 2. Red links are bad links of HTTP status 400 or 404.<br/> 
 3. Grey links are unknown with any other HTTP status.<br/> 
 
 <br/>  
-* Item 1 The command can check HTML pages links via URL using -u option and supplying a valid HTTP URL.<br>
+* The command can check HTML pages links via URL using -u option and supplying a valid HTTP URL.<br>
 
 * The tool can check multiple URLs or HTML files to be checked at once if more than enter one URL or HTML file is entered one after another, separated by a space.<br/>
 But url and html cannot be mixed together in a single command.<br/>
 The -u option is still required when checking multiple URLs.<br/>
+
 * Handles Unix and windows style of args -u or /u<br/>
+
 * Handles links that cause timeouts smoothly
+
 * Output in JSON format
+
 * Flags to choice to only show good or bad links
