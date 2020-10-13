@@ -35,8 +35,6 @@ Options:<br/>
 2. Red links are bad links of HTTP status 400 or 404.<br/> 
 3. Grey links are unknown with any other HTTP status.<br/> 
 
-<br/>
-
 * The command can check HTML pages links via URL using -u option and supplying a valid HTTP URL.<br>
 
 * The tool can check multiple URLs or HTML files to be checked at once if more than enter one URL or HTML file is entered one after another, separated by a space.<br/>
