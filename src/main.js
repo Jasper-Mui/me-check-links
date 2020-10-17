@@ -15,15 +15,18 @@ function parseArgs(rawArgs) {
         '-j': Boolean,
         '-g': Boolean,
         '-b': Boolean,
+        '-i': Boolean,
       }
     );
     return {
       version: args['-v'] || false,
       url: args['-u'] || false,
-      inputArg: args['-u'] || args['-j'] || args['-g'] || args['-b'] ? rawArgs.slice(3) : rawArgs.slice(2),
+      inputArg: args['-u'] || args['-j'] || args['-g'] || args['-b'] || args['-i'] ? rawArgs.slice(3) : rawArgs.slice(2),
       jsonOutput: args['-j'] || false,
       showGood: args['-g'] || false,
       showBad: args['-b'] || false,
+      ignoreUrl: args['-i'] || false,
+      ignoreFile : args['-i'] ? rawArgs[4] : null
     };
 }
 
@@ -36,9 +39,36 @@ async function getStatus(url) { // promise function to fetch all url status
     }
 }
 
-function linkCheck(file, jsonOutput, showGood, showBad) {
+function linkCheck(file, args) {
     const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,25}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
-    const urls = file.match(regex);
+    let urls = file.match(regex);
+
+    if(args.ignoreUrl){     //function to filter ignored URLs 
+        let ignore;
+
+        try{
+            ignore = fs.readFileSync(args.ignoreFile, 'utf8')
+        }
+        catch(err){
+            throw new Error('Error reading ignore file')
+        }
+
+        const regex = /^((?!#).)*$/gm;
+        let ignoreUrls = ignore.match(regex);
+
+        if(ignoreUrls != null){
+            ignoreUrls.forEach((ignoreUrl) => {
+
+                if (ignoreUrl != '' && !ignoreUrl.startsWith('https://') && !ignoreUrl.startsWith('http://'))
+                throw new Error('Invalid Error File');
+
+                urls = urls.filter((url)=> url !== ignoreUrl);
+
+
+            })
+
+        }
+    }
 
     const promises = urls.map(getStatus);
 
@@ -47,27 +77,27 @@ function linkCheck(file, jsonOutput, showGood, showBad) {
         .allSettled(promises)
         .then(res => {
             return res.map(res => {
-                if (res.value.status == 200 && showGood) {
-                    if (!jsonOutput)
+                if (res.value.status == 200 && args.showGood) {
+                    if (!args.jsonOutput)
                         console.log(chalk.green(res.value.url));
 
                     return { url: res.value.url, status: res.value.status }
-                } else if ((res.value.status == 400 || res.value.status == 404) && showBad) {
-                    if (!jsonOutput)
+                } else if ((res.value.status == 400 || res.value.status == 404) && args.showBad) {
+                    if (!args.jsonOutput)
                         console.log(chalk.red(res.value.url));
 
                     return { url: res.value.url, status: res.value.status }
-                } else if (showBad) {
-                    if (!jsonOutput)
+                } else if (args.showBad) {
+                    if (!args.jsonOutput)
                         console.log(chalk.grey(res.value.url));
 
                     return { url: res.value.url, status: res.value.status }
                 }
             })
         })
-        .then(res => { if (jsonOutput) console.log(res) })
+        .then(res => { if (args.jsonOutput) console.log(res) })
         .catch(error => {
-            if (showBad)
+            if (args.showBad)
                 console.log(chalk.red(url));
         })
 }
@@ -102,10 +132,13 @@ export function cli(args) {
                 });
         })
     } else {
+        if (parsedArgs.ignoreUrl){
+            parsedArgs.inputArg = parsedArgs.inputArg.slice(0,1);      //if ignoreUrl is used, only links from one file can be processed
+        }
         parsedArgs.inputArg.map(file => {
             fs.readFile(file, (err, data) => {
                 if (err) throw err;
-                linkCheck(data.toString(), parsedArgs.jsonOutput, parsedArgs.showGood, parsedArgs.showBad);
+                linkCheck(data.toString(), parsedArgs);
             })
         })
     }
