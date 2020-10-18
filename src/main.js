@@ -57,12 +57,14 @@ function linkCheck(file, args) {
         let ignoreUrls = ignore.match(regex);
 
         if(ignoreUrls != null){
+            ignoreUrls = ignoreUrls.filter((url)=> url != '');
+
             ignoreUrls.forEach((ignoreUrl) => {
 
-                if (ignoreUrl != '' && !ignoreUrl.startsWith('https://') && !ignoreUrl.startsWith('http://'))
-                throw new Error('Invalid Error File');
+                if (!ignoreUrl.startsWith('https://') && !ignoreUrl.startsWith('http://'))
+                throw new Error('Invalid Ignore File');
 
-                urls = urls.filter((url)=> url !== ignoreUrl);
+                urls = urls.filter((url)=> !url.startsWith(ignoreUrl));
 
 
             })
