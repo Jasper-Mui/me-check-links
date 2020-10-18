@@ -26,7 +26,7 @@ function parseArgs(rawArgs) {
       showGood: args['-g'] || false,
       showBad: args['-b'] || false,
       ignoreUrl: args['-i'] || false,
-      ignoreFile : args['-i'] ? rawArgs[4] : null
+      ignoreFile : args['-i'] ? rawArgs[3] : null
     };
 }
 
@@ -133,7 +133,7 @@ export function cli(args) {
         })
     } else {
         if (parsedArgs.ignoreUrl){
-            parsedArgs.inputArg = parsedArgs.inputArg.slice(0,1);      //if ignoreUrl is used, only links from one file can be processed
+            parsedArgs.inputArg = parsedArgs.inputArg.slice(1);     
         }
         parsedArgs.inputArg.map(file => {
             fs.readFile(file, (err, data) => {
