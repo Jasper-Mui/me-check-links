@@ -39,37 +39,41 @@ async function getStatus(url) { // promise function to fetch all url status
     }
 }
 
+function ignoreUrl(ignoreFile, urls) {
+    let ignore;
+
+    try{
+        ignore = fs.readFileSync(ignoreFile, 'utf8')
+    }
+    catch(err){
+        throw new Error('Error reading ignore file')
+    }
+
+    const regex = /^((?!#).)*$/gm;
+    let ignoreUrls = ignore.match(regex);
+
+    if(ignoreUrls != null){
+        ignoreUrls = ignoreUrls.filter((url)=> url != '');
+
+        ignoreUrls.forEach((ignoreUrl) => {
+
+            if (!ignoreUrl.startsWith('https://') && !ignoreUrl.startsWith('http://'))
+            throw new Error('Invalid Ignore File');
+
+            urls = urls.filter((url)=> !url.startsWith(ignoreUrl));
+        })
+    }
+
+    return urls
+}
+
+
 function linkCheck(file, args) {
     const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,25}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
     let urls = file.match(regex);
 
     if(args.ignoreUrl){     //function to filter ignored URLs 
-        let ignore;
-
-        try{
-            ignore = fs.readFileSync(args.ignoreFile, 'utf8')
-        }
-        catch(err){
-            throw new Error('Error reading ignore file')
-        }
-
-        const regex = /^((?!#).)*$/gm;
-        let ignoreUrls = ignore.match(regex);
-
-        if(ignoreUrls != null){
-            ignoreUrls = ignoreUrls.filter((url)=> url != '');
-
-            ignoreUrls.forEach((ignoreUrl) => {
-
-                if (!ignoreUrl.startsWith('https://') && !ignoreUrl.startsWith('http://'))
-                throw new Error('Invalid Ignore File');
-
-                urls = urls.filter((url)=> !url.startsWith(ignoreUrl));
-
-
-            })
-
-        }
+        urls = ignoreUrl(args.ignoreFile, urls)
     }
 
     const promises = urls.map(getStatus);
