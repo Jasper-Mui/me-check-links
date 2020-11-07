@@ -3,9 +3,15 @@ import chalk from 'chalk';
 import fetch from 'node-fetch';
 import fs from 'fs'
 
-export function linkCheck(file, args) {
+export function linkCheck(file, args, showGood, showBad, isArray) {
     const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,25}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
-    let urls = file.match(regex);
+    let urls = null;
+
+    if (isArray) {
+        urls = file;
+    } else {
+        urls = file.match(regex);
+    }
 
     if(args.ignoreUrl){     //function to filter ignored URLs 
         urls = ignoreUrl(args.ignoreFile, urls)
@@ -18,17 +24,17 @@ export function linkCheck(file, args) {
         .allSettled(promises)
         .then(res => {
             return res.map(res => {
-                if (res.value.status == 200 && args.showGood) {
+                if (res.value.status == 200 && showGood) {
                     if (!args.jsonOutput)
                         console.log(chalk.green(res.value.url));
 
                     return { url: res.value.url, status: res.value.status }
-                } else if ((res.value.status == 400 || res.value.status == 404) && args.showBad) {
+                } else if ((res.value.status == 400 || res.value.status == 404) && showBad) {
                     if (!args.jsonOutput)
                         console.log(chalk.red(res.value.url));
 
                     return { url: res.value.url, status: res.value.status }
-                } else if (args.showBad) {
+                } else if (showBad) {
                     if (!args.jsonOutput)
                         console.log(chalk.grey(res.value.url));
 
@@ -38,7 +44,7 @@ export function linkCheck(file, args) {
         })
         .then(res => { if (args.jsonOutput) console.log(res) })
         .catch(error => {
-            if (args.showBad)
+            if (showBad)
                 console.log(chalk.red(url));
         })
 }
@@ -78,4 +84,14 @@ function ignoreUrl(ignoreFile, urls) {
     }
 
     return urls
+}
+
+export const testTelescopePost = (body, url) => {
+    const localhostRegex = /https?:\/\/localhost:[0-9]*/
+    const baseURL = url.match(localhostRegex);
+
+    return (
+        JSON.parse(body).map(i => {
+            return baseURL[0] + i.url
+    }))
 }
