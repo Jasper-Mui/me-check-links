@@ -51,12 +51,12 @@ export function linkCheck(file, args, showGood, showBad, isArray) {
 
 export async function getStatus(url) {
   // promise function to fetch all url status
-  try {
+  // try {
     const res = await fetch(url);
     return { url: url, status: res.status };
-  } catch (err) {
-    return { url, status: err.status };
-  }
+//   } catch (err) {
+//     return { url, status: err.status };
+//   }
 }
 
 export function ignoreUrl(ignoreFile, urls) {
