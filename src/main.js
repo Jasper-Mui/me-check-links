@@ -53,6 +53,11 @@ export function cli(args) {
     console.log("mcl - a command to check links of a HTML page");
     console.log("-v,  to get verison number and name of the tool");
     console.log("-u,  to check link of a html page of supplied url");
+    console.log("-g,  show only good links");
+    console.log("-b,  show only bad links");
+    console.log("-j,  show in json format");
+
+
   } else if (parsedArgs.version) {
     console.log(
       "Name of Tool: " + pjson.name + "\nVerison number: " + pjson.version
@@ -106,9 +111,11 @@ export function cli(args) {
     if (parsedArgs.ignoreUrl) {
       parsedArgs.inputArg = parsedArgs.inputArg.slice(1);
     }
+
     parsedArgs.inputArg.map((file) => {
       fs.readFile(file, (err, data) => {
         if (err) throw err;
+
         linkCheck(
           data.toString(),
           parsedArgs,

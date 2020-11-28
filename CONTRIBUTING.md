@@ -21,3 +21,7 @@ Prettier and ESLint both have extensions available on visual studio code feel fr
 
 https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+
+<h2>Commands</h2>
+Check test coverage command: `npm run coverage`
+Run jest test: `npm run test`

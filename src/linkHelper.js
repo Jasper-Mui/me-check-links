@@ -49,7 +49,7 @@ export function linkCheck(file, args, showGood, showBad, isArray) {
     });
 }
 
-async function getStatus(url) {
+export async function getStatus(url) {
   // promise function to fetch all url status
   try {
     const res = await fetch(url);
@@ -59,9 +59,9 @@ async function getStatus(url) {
   }
 }
 
-function ignoreUrl(ignoreFile, urls) {
+export function ignoreUrl(ignoreFile, urls) {
   let ignore;
-
+  
   try {
     ignore = fs.readFileSync(ignoreFile, "utf8");
   } catch (err) {
@@ -81,7 +81,7 @@ function ignoreUrl(ignoreFile, urls) {
       urls = urls.filter((url) => !url.startsWith(ignoreUrl));
     });
   }
-
+ 
   return urls;
 }
 
