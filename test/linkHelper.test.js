@@ -18,13 +18,20 @@ describe("ignoreUrl tests", () => {
     const fileIgnoreEmpty = "fileIgnoreEmpty";
     const fileIgnoreEmptyData = "#dsfsd";
 
+    const fileIgnoreBad = "fileIgnoreBad";
+    const fileIgnoreBadData = "notUrl";
   
     beforeAll(() => {
       fs.__setMockFileData(fileIgnoreYoutube, fileIgnoreYoutbeData);
       fs.__setMockFileData(fileIgnoreEmpty, fileIgnoreEmptyData);
+      fs.__setMockFileData(fileIgnoreBad, fileIgnoreBadData);
     });
 
-    test("ignoreUrl ignore file with https://www.youtube.", () => {
+    test("bad ignore file, should throw error", () => {
+        expect(() => ignoreUrl(fileIgnoreBad, links)).toThrow();
+    })
+
+    test("ignore file with https://www.youtube.", () => {
         const resultLink = [
             'https://avatars1.githubusercontent.com/u/780020?s=400&amp'
         ]
@@ -32,7 +39,7 @@ describe("ignoreUrl tests", () => {
         expect(ignoreUrl(fileIgnoreYoutube, links)).toStrictEqual(resultLink);
     })
     
-    test("ignoreUrl ignore file with https://www.youtube.", () => {
+    test("ignore file with https://www.youtube.", () => {
         const resultLink = [
             'https://avatars1.githubusercontent.com/u/780020?s=400&amp'
         ]
@@ -40,7 +47,7 @@ describe("ignoreUrl tests", () => {
         expect(ignoreUrl(fileIgnoreYoutube, links)).toStrictEqual(resultLink);
     })
 
-    test("ignoreUrl emptyIgnore file", () => {
+    test("empty Ignore file, does not ignore still works", () => {
         const resultink = [
             'https://avatars1.githubusercontent.com/u/780020?s=400&amp',
             'https://www.youtube.com/watch?v=KDt01U859Ik',
@@ -50,7 +57,7 @@ describe("ignoreUrl tests", () => {
         //'.\\testText\\ignoreEmpty'
     })
 
-    test("ignoreUrl return empty youtube is in ignoreYoutube", () => {
+    test("return empty youtube host url is in ignoreYoutube", () => {
         const oneLink = [
             'https://www.youtube.com/watch?v=KDt01U859Ik'
         ]
@@ -64,7 +71,7 @@ describe("ignoreUrl tests", () => {
 describe("ignoreUrl tests", () => {
     const url = "https://example.ca";
 
-    test("resposne test", async () => {
+    test("404 resposne test", async () => {
         nock(url).get("/").reply(404, {});
 
         const data = await getStatus(url);
@@ -76,7 +83,7 @@ describe("ignoreUrl tests", () => {
         expect(data).toStrictEqual(result);
     })
 
-    test("resposne test", async () => {
+    test("200 resposne", async () => {
         nock(url).get("/").reply(200, {});
 
         const data = await getStatus(url);
@@ -87,6 +94,15 @@ describe("ignoreUrl tests", () => {
 
         expect(data).toStrictEqual(result);
     })
+
+    test("bad url test, return undefined status", async () => {
+
+        const data = await getStatus("not a url");
+        const result = {
+            url: 'not a url',
+            status: undefined
+        }
+
+        expect(data).toStrictEqual(result);
+    })
 });
-
-
