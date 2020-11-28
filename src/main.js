@@ -5,7 +5,7 @@ import fs from "fs";
 import pjson from "../package.json";
 import { linkCheck, testTelescopePost } from "./linkHelper";
 
-function parseArgs(rawArgs) {
+export function parseArgs(rawArgs) {
   if (rawArgs[2]) rawArgs[2] = rawArgs[2].replace(/^\//, "-");
 
   const args = arg({
