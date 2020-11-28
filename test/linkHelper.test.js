@@ -105,4 +105,37 @@ describe("ignoreUrl tests", () => {
 
         expect(data).toStrictEqual(result);
     })
+
+    test("null url test, return undefined status", async () => {
+
+        const data = await getStatus(null);
+        const result = {
+            url: null,
+            status: undefined
+        }
+
+        expect(data).toStrictEqual(result);
+    })
+
+    test("empty url test, return undefined status", async () => {
+
+        const data = await getStatus('');
+        const result = {
+            url: '',
+            status: undefined
+        }
+
+        expect(data).toStrictEqual(result);
+    })
+
+    test("undefined url test, return undefined status", async () => {
+
+        const data = await getStatus(undefined);
+        const result = {
+            url: undefined,
+            status: undefined
+        }
+
+        expect(data).toStrictEqual(result);
+    })
 });
