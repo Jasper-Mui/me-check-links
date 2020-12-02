@@ -27,7 +27,7 @@ Options:<br/>
 -j or /j,  change output to json format, all links display in green no long follows color rules<br/> 
 -b or /b,  this flag will only show bad links, no flag specified will show all links<br/> 
 -g or /g,  this flag will onyl show good links, no flag specified will show all links<br/> 
--i or /i,  mcl -i  <ignore> <file><br/> 
+-i or /i,  mcl -i  &lt ignore &gt &lt file &gt<br/> 
            first file ignores links that are in the file which is space delimited <br/> 
            only valid links are allowed in the file and lines that start with # will be ignored<br/> 
            
