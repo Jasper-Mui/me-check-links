@@ -1,6 +1,6 @@
 {
   "name": "@jasper-mui/me-check-link",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "A CLI to check link of html pages",
   "main": "src/main.js",
   "bin": {
