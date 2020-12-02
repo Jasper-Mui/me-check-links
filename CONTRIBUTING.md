@@ -22,6 +22,11 @@ Prettier and ESLint both have extensions available on visual studio code feel fr
 https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
 
+<h2>Tests</h2>
+Test are written in the /test folder. Test are written in jest please do not use another framework.
+Please write test in one describe block for each function.
+
 <h2>Commands</h2>
 Check test coverage command: `npm run coverage`
 Run jest test: `npm run test`
+
