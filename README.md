@@ -27,7 +27,10 @@ Options:<br/>
 -j or /j,  change output to json format, all links display in green no long follows color rules<br/> 
 -b or /b,  this flag will only show bad links, no flag specified will show all links
 -g or /g,  this flag will onyl show good links, no flag specified will show all links
-
+-i or /i,  mcl -i &gt ignore &lt &gt file &lt 
+           first file ignores links that are in the file which is space delimited 
+           only valid links are allowed in the file and lines that start with # will be ignored
+           
 <h2>Feature</h2>
 
 * The result of the links shows up in color to display the status of links. Does not apply to -j option as all links will show in green<br/>  

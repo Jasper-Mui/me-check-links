@@ -56,6 +56,10 @@ export function cli(args) {
     console.log("-g,  show only good links");
     console.log("-b,  show only bad links");
     console.log("-j,  show in json format");
+    console.log("-i,  ignore links given a file also supplied with a tex to check" + 
+                "\n\t ie. mcl -i <ignore file> <file>" +
+                "\n\t the command will ignore links in the files that are newline delimited" +
+                "\n\t only valid links are allowed in the file and lines that start with # will be ignored");
 
 
   } else if (parsedArgs.version) {
