@@ -25,11 +25,11 @@ Options:<br/>
 -v or /v,  to get the version number and name of the tool<br/> 
 -u or /u,  to check the links of a HTML page of supplied URL<br/> 
 -j or /j,  change output to json format, all links display in green no long follows color rules<br/> 
--b or /b,  this flag will only show bad links, no flag specified will show all links
--g or /g,  this flag will onyl show good links, no flag specified will show all links
--i or /i,  mcl -i  <ignore> <file>
-           first file ignores links that are in the file which is space delimited 
-           only valid links are allowed in the file and lines that start with # will be ignored
+-b or /b,  this flag will only show bad links, no flag specified will show all links<br/> 
+-g or /g,  this flag will onyl show good links, no flag specified will show all links<br/> 
+-i or /i,  mcl -i  <ignore> <file><br/> 
+           first file ignores links that are in the file which is space delimited <br/> 
+           only valid links are allowed in the file and lines that start with # will be ignored<br/> 
            
 <h2>Feature</h2>
 
