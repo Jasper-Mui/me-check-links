@@ -68,7 +68,7 @@ describe("ignoreUrl tests", () => {
     })
 });
 
-describe("ignoreUrl tests", () => {
+describe("getStatus tests", () => {
     const url = "https://example.ca";
 
     test("404 resposne test", async () => {
